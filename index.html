@@ -14,22 +14,23 @@
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
       crossorigin="anonymous"
     />
+     <!-- User CSS -->
     <link href="styles.css" rel="stylesheet type="text/css">
     <title>Task Planner</title>
   </head>
   <body>
     <!-- body -->
-    <div class="container-fluid my-5 bg-light text-dark">
+    <div class="container-fluid my-5 bg-dark text-white">
       <h1 class="text-center my-3">Task Planner</h1>
 
-      <div id="container">
-        <div class="container col-12 text-light" style="margin-top: 20px;">
+      
+        <div class="container col-12 bg-dark text-white" style="margin-top: 20px;">
           <h2>
-            Whats on today?
+            Task List
           </h2>
 
           <!-- Table begins-->
-          <div class="container text-light" style="margin-top: 30px;">
+          <div class="container-fluid text-dark" style="margin-top: 30px;">
             <table
               class="text-center table table-bordered table-striped table-hover table-dark"
             >
@@ -41,39 +42,125 @@
                   <th>Assigned to</th>
                   <th>Due Date</th>
                   <th>
-                    <button
-                      type="button"
-                      class="btn btn-outline-primary .btn-sm"
-                    >
-                      <a href="task.html">New Task</a>
-                    </button>
+                    <!-- Modal Code-->
+                    <button class="btn btn-outline-success .btn-sm" data-toggle="modal" data-target="#myModal">Create new Task</button>
+                    <div class="container bg-dark text-dark" style="margin-top: 30px;">
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content bg-dark text-white">
+                    <div class="modal-header">
+                        <h5 class="modal-title">New Task</h5>
+                        <button type="button" class="close btn btn-outline-success .btn-sm text-white" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                      <!-- Form Code-->
+
+        <div class="container d-flex-inline" style="text-align: left; margin-top:20px; padding-top:20px; padding-bottom:20px;">   
+            <form>
+                <div class="form-group row">
+                    <label class="col-sm-5 col-form-label" for="task1">Task:</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="Description" placeholder="Task name" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                  <label for="example-date-input" class="col-sm-5 col-form-label">Due Date:</label>
+                  <div class="col-sm-5">
+                    <input class="form-control" type="date" value="yyyy-mm-dd" id="example-date-input" required>
+                  </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-5 col-form-label" for="task2">Assigned:</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="task2" placeholder="Group assigned to" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label" for="task2">Description:</label>
+                    <div class="col-sm-9">
+                      <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Description of task" rows="3" required></textarea>
+                    </div>
+                </div>
+                <!-- Status Checkbox code -->
+                <h5> Status </h5>
+                <div class="form-group d-lg-inline-flex text-white">
+                  
+  <div class="form-check-inline">
+    <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" checked>
+    <label class="form-check-label" for="invalidCheck2">
+     To Do
+    </label>
+  </div>
+                  <div class="form-check-inline">
+    <input class="form-check-input" type="checkbox" value="" id="invalidCheck2">
+    <label class="form-check-label" for="invalidCheck2">
+     In Progres
+    </label>
+  </div>
+                  <div class="form-check-inline">
+    <input class="form-check-input" type="checkbox" value="" id="invalidCheck2">
+    <label class="form-check-label" for="invalidCheck2">
+     Review
+    </label>
+  </div>
+                   <div class="form-check-inline">
+    <input class="form-check-input" type="checkbox" value="" id="invalidCheck2">
+    <label class="form-check-label" for="invalidCheck2">
+     Done
+    </label>
+  </div>
+</div>
+
+             <!-- Status checkbox code end -->
+            
+                
+                <div class="container d-flex-inline-reverse">
+                <button class="btn btn btn-secondary .btn-lg" id='createTaskBtn' type="submit" >Create new Task</button>
+                </div>
+                <!-- Form code end-->
+       
+              </div>
+                    </div>
+                    <div class="modal-footer bg-dark text-white">
+                        <button class="btn btn btn-outline-success .btn-sm" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+          </div>
+          </div>
+                     <!-- Modal code end -->
+
                   </th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>
-                    <div class="dropdown">
+                     <!-- Dropdown right list-->
+                    <div class="dropright">
                       <button
-                        class="btn btn-secondary dropdown-toggle btn-outline-warning"
+                        class="btn btn-secondary dropdown-toggle btn-outline-info"
                         type="button"
                         id="dropdownMenuButton"
                         data-toggle="dropdown"
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
-                        Status
+                      To Do
                       </button>
                       <div
                         class="dropdown-menu"
                         aria-labelledby="dropdownMenuButton"
                       >
-                        <a class="dropdown-item" href="#">TO DO</a>
-                        <a class="dropdown-item" href="#">IN PROGRESS</a>
-                        <a class="dropdown-item" href="#">REVIEW</a>
-                        <a class="dropdown-item" href="#">DONE</a>
+                      <a class="dropdown-item" href="#">To Do</a>
+                      <a class="dropdown-item" href="#">In Progress</a>
+                      <a class="dropdown-item" href="#">Review</a>
+                      <a class="dropdown-item" href="#">Done</a>
                       </div>
                     </div>
+                     <!-- Dropdown right list end -->
                   </td>
 
                   <td>CSS update</td>
@@ -87,31 +174,61 @@
                     >
                       Edit
                     </button>
+                    <!-- Delete Button-->
+                    <button
+                      type="button"
+                     class="btn btn-outline-danger" data-toggle="modal" data-target="#confirmdelete"
+                    >
+                      Delete
+                    </button>
+                    <!-- Modal -->
+<div class="modal fade" id="confirmdelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       Do you want to delete task
+      </div>
+      <div class="modal-footer">
+        <!-- Modal end -->
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-outline-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <div class="dropdown">
+                     <!-- Dropdown right list-->
+                    <div class="dropright">
                       <button
-                        class="btn btn-secondary dropdown-toggle btn-outline-warning"
+                      class="btn btn-secondary dropdown-toggle btn-outline-info"
                         type="button"
                         id="dropdownMenuButton"
                         data-toggle="dropdown"
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
-                        Status
+                      To Do
                       </button>
                       <div
                         class="dropdown-menu"
                         aria-labelledby="dropdownMenuButton"
                       >
-                        <a class="dropdown-item" href="#">TO DO</a>
-                        <a class="dropdown-item" href="#">IN PROGRESS</a>
-                        <a class="dropdown-item" href="#">REVIEW</a>
-                        <a class="dropdown-item" href="#">DONE</a>
+                      <a class="dropdown-item" href="#">To Do</a>
+                      <a class="dropdown-item" href="#">In Progress</a>
+                      <a class="dropdown-item" href="#">Review</a>
+                      <a class="dropdown-item" href="#">Done</a>
                       </div>
                     </div>
+                     <!-- Dropdown right list end -->
                   </td>
                   <td>Zoom Meeting</td>
                   <td>Zoom meeting with Pod 1 - Anindha's room</td>
@@ -124,31 +241,61 @@
                     >
                       Edit
                     </button>
+                    <!-- Delete Button-->
+                    <button
+                      type="button"
+                     class="btn btn-outline-danger" data-toggle="modal" data-target="#confirmdelete"
+                    >
+                      Delete
+                    </button>
+                    <!-- Modal -->
+<div class="modal fade" id="confirmdelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       Do you want to delete task
+      </div>
+      <div class="modal-footer">
+        <!-- Modal end -->
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-outline-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <div class="dropdown">
+                     <!-- Dropdown right list-->
+                    <div class="dropright">
                       <button
-                        class="btn btn-secondary dropdown-toggle btn-outline-warning"
+                        class="btn btn-secondary dropdown-toggle btn-outline-info"
                         type="button"
                         id="dropdownMenuButton"
                         data-toggle="dropdown"
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
-                        Status
+                      To Do
                       </button>
                       <div
                         class="dropdown-menu"
                         aria-labelledby="dropdownMenuButton"
                       >
-                        <a class="dropdown-item" href="#">TO DO</a>
-                        <a class="dropdown-item" href="#">IN PROGRESS</a>
-                        <a class="dropdown-item" href="#">REVIEW</a>
-                        <a class="dropdown-item" href="#">DONE</a>
+                      <a class="dropdown-item" href="#">To Do</a>
+                      <a class="dropdown-item" href="#">In Progress</a>
+                      <a class="dropdown-item" href="#">Review</a>
+                      <a class="dropdown-item" href="#">Done</a>
                       </div>
                     </div>
+                     <!-- Dropdown right list end -->
                   </td>
                   <td>Pair programming</td>
                   <td>Nirmal and Nigel coding task planner</td>
@@ -161,31 +308,61 @@
                     >
                       Edit
                     </button>
+                    <!-- Delete Button-->
+                    <button
+                      type="button"
+                     class="btn btn-outline-danger" data-toggle="modal" data-target="#confirmdelete"
+                    >
+                      Delete
+                    </button>
+                    <!-- Modal -->
+<div class="modal fade" id="confirmdelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       Do you want to delete task
+      </div>
+      <div class="modal-footer">
+        <!-- Modal end -->
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-outline-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <div class="dropdown">
+                     <!-- Dropdown right list-->
+                    <div class="dropright">
                       <button
-                        class="btn btn-secondary dropdown-toggle btn-outline-warning"
+                      class="btn btn-secondary dropdown-toggle btn-outline-info"
                         type="button"
                         id="dropdownMenuButton"
                         data-toggle="dropdown"
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
-                        Status
+                      To Do
                       </button>
                       <div
                         class="dropdown-menu"
                         aria-labelledby="dropdownMenuButton"
                       >
-                        <a class="dropdown-item" href="#">TO DO</a>
-                        <a class="dropdown-item" href="#">IN PROGRESS</a>
-                        <a class="dropdown-item" href="#">REVIEW</a>
-                        <a class="dropdown-item" href="#">DONE</a>
+                      <a class="dropdown-item" href="#">To Do</a>
+                      <a class="dropdown-item" href="#">In Progress</a>
+                      <a class="dropdown-item" href="#">Review</a>
+                      <a class="dropdown-item" href="#">Done</a>
                       </div>
                     </div>
+                     <!-- Dropdown right list end -->
                   </td>
                   <td>JScript Course</td>
                   <td>Finish Scrimba JavaScript course</td>
@@ -198,31 +375,61 @@
                     >
                       Edit
                     </button>
+                    <!-- Delete Button-->
+                    <button
+                      type="button"
+                     class="btn btn-outline-danger" data-toggle="modal" data-target="#confirmdelete"
+                    >
+                      Delete
+                    </button>
+                    <!-- Modal -->
+<div class="modal fade" id="confirmdelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       Do you want to delete task
+      </div>
+      <div class="modal-footer">
+        <!-- Modal end -->
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-outline-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <div class="dropdown">
+                     <!-- Dropdown right list-->
+                    <div class="dropright">
                       <button
-                        class="btn btn-secondary dropdown-toggle btn-outline-warning"
+                        class="btn btn-secondary dropdown-toggle btn-outline-info"
                         type="button"
                         id="dropdownMenuButton"
                         data-toggle="dropdown"
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
-                        Status
+                      To Do
                       </button>
                       <div
                         class="dropdown-menu"
                         aria-labelledby="dropdownMenuButton"
                       >
-                        <a class="dropdown-item" href="#">TO DO</a>
-                        <a class="dropdown-item" href="#">IN PROGRESS</a>
-                        <a class="dropdown-item" href="#">REVIEW</a>
-                        <a class="dropdown-item" href="#">DONE</a>
+                        <a class="dropdown-item" href="#">To Do</a>
+                        <a class="dropdown-item" href="#">In Progress</a>
+                        <a class="dropdown-item" href="#">Review</a>
+                        <a class="dropdown-item" href="#">Done</a>
                       </div>
                     </div>
+                     <!-- Dropdown right list end -->
                   </td>
                   <td>LinkedIn Profile</td>
                   <td>Update LinkedIn profile</td>
@@ -235,54 +442,46 @@
                     >
                       Edit
                     </button>
+                    <!-- Delete Button-->
+                    <button
+                      type="button"
+                     class="btn btn-outline-danger" data-toggle="modal" data-target="#confirmdelete"
+                    >
+                      Delete
+                    </button>
+                    <!-- Modal -->
+<div class="modal fade" id="confirmdelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       Do you want to delete task
+      </div>
+      <div class="modal-footer">
+         <!-- Modal end -->
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-outline-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+ <!-- Delete Button End-->
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          <!-- Table ends-->
+          <!-- Table end-->
 
           <form>
-            <!-- checkbox starts
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                  Default checkbox
-                </label>
-              </div>
-               
-                
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
-                <label class="form-check-label" for="defaultCheck2">
-                  Disabled checkbox
-                </label>
-              </div>
-              checkbox ends-->
-            <!-- form starts
-              <div class="form-group row">
-                    <label class="col-sm-3 col-form-label" for="task1">Task one</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="task1">
-                    </div>
-                </div>
-                
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label" for="task2">Task Two</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="task2">
-                    </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-3 col-form-label" for="task3">Task Three</label>
-                  <div class="col-sm-9">
-                      <input type="text" class="form-control" id="task3">
-                  
-                  
-            </div>
-              </div>
-                form ends-->
+            
+             <!--  form ends-->
           </form>
         </div>
       </div>
@@ -306,6 +505,7 @@
       integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
       crossorigin="anonymous"
     ></script>
-    <script src="index.js"></script>
+    <!-- User JavaScript -->
+    <script src="./script.js"></script>
   </body>
 </html>
