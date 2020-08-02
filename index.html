@@ -62,105 +62,181 @@
 													<span aria-hidden="true">&times;</span>
 												</button>
 											</div>
-											<div class="modal-body" id="tasks">
+											<div class="modal-body">
 												<!-- Start of Form-->
 
-												<div class="form-group row">
-													<label
-														for="example-text-input"
-														class="col-3 col-form-label"
-														>Task:</label
-													>
-													<div class="col-12">
-														<input
-															class="form-control"
-															type="text"
-															value=""
-															id="taskName"
-															placeholder="Task name"
-															required
-														/>
+												<form class="needs-validation" novalidate id="tasks">
+													<div class="form-group row">
+														<label
+															for="example-text-input"
+															class="col-3 col-form-label"
+															>Task:</label
+														>
+														<div class="col-12">
+															<input
+																class="form-control"
+																type="text"
+																value=""
+																id="taskName"
+																pattern="[A-Za-z]{8,}"
+																placeholder="Task name"
+																required
+															/>
+															<div class="invalid-feedback">
+																Task name required - greater than 8 characters
+															</div>
+														</div>
 													</div>
-												</div>
-												<div class="form-group row">
-													<label
-														for="example-date-input"
-														class="col-3 col-form-label"
-														>Date:</label
-													>
-													<div class="col-12">
-														<input
-															class="form-control"
-															type="date"
-															value="yyyy-mm-dd"
-															id="taskDate"
-															required
-														/>
+													<div class="form-group row">
+														<label
+															for="example-date-input"
+															class="col-3 col-form-label"
+															>Date:</label
+														>
+														<div class="col-12">
+															<input
+																class="form-control"
+																type="date"
+																value=""
+																id="taskDate"
+																required
+															/>
+															<div class="invalid-feedback">
+																Date required
+															</div>
+														</div>
 													</div>
-												</div>
-												<div class="form-group row">
-													<label
-														for="example-date-input"
-														class="col-3 col-form-label"
-														>Time:</label
-													>
-													<div class="col-12">
-														<input
-															class="form-control"
-															type="time"
-															value=""
-															id="taskTime"
-															required
-														/>
+													<div class="form-group row">
+														<label
+															for="example-date-input"
+															class="col-3 col-form-label"
+															>Time:</label
+														>
+														<div class="col-12">
+															<input
+																class="form-control"
+																type="time"
+																value=""
+																id="taskTime"
+																required
+															/>
+															<div class="invalid-feedback">
+																Time required
+															</div>
+														</div>
 													</div>
-												</div>
-												<div class="form-group row">
-													<label
-														for="example-text-input"
-														class="col-3 col-form-label"
-														>Assigned:</label
-													>
-													<div class="col-12">
-														<input
-															class="form-control"
-															type="text"
-															value=""
-															id="taskAssigned"
-															placeholder="Assigned to"
-															required
-														/>
+													<div class="form-group row">
+														<label
+															for="example-text-input"
+															class="col-3 col-form-label"
+															>Assigned:</label
+														>
+														<div class="col-12">
+															<input
+																class="form-control"
+																type="text"
+																value=""
+																id="taskAssigned"
+																pattern="[A-Za-z]{8,}"
+																placeholder="Assigned to"
+																required
+															/>
+															<div class="invalid-feedback">
+																Assignee required - greater than 8 characters
+															</div>
+														</div>
 													</div>
-												</div>
 
-												<div class="form-group row">
-													<label
-														for="example-text-input"
-														class="col-3 col-form-label"
-														>Description:</label
-													>
-													<div class="col-12">
-														<textarea
-															class="form-control"
-															type="text"
-															value=""
-															id="taskDescription"
-															placeholder="Description of task"
-															rows="3"
-															required
-														></textarea>
+													<div class="form-group row">
+														<label
+															for="example-text-input"
+															class="col-3 col-form-label"
+															>Description:</label
+														>
+														<div class="col-12">
+															<input
+																class="form-control"
+																type="text"
+																value=""
+																id="taskDescription"
+																pattern="[A-Za-z]{15,}"
+																placeholder="Description of task"
+																rows="3"
+																required
+															/>
+
+															<div class="invalid-feedback">
+																Description required - greater than 15
+																characters
+															</div>
+														</div>
 													</div>
-												</div>
 
-												<!-- End of Form-->
+													<!-- End of Form-->
+													<!-- Status Checkbox code -->
+													<h5>Status</h5>
 
-												<button
-													type="submit"
-													class="btn btn-outline-success .btn-sm"
-													id="createTaskBtn"
-												>
-													Create new task
-												</button>
+													<div class="form-group d-lg-inline-flex">
+														<div
+															class="form-check-inline custom-control custom-checkbox"
+														>
+															<input
+																class="form-check-input"
+																type="checkbox"
+																value="To Do"
+																id="taskStatus"
+																checked
+															/>
+															<label class="form-check-label" for="">
+																To Do
+															</label>
+														</div>
+														<div class="form-check-inline">
+															<input
+																class="form-check-input"
+																type="checkbox"
+																value="In Progress"
+																id="taskStatus"
+															/>
+															<label class="form-check-label" for="">
+																In Progress
+															</label>
+														</div>
+														<div class="form-check-inline">
+															<input
+																class="form-check-input"
+																type="checkbox"
+																value="Review"
+																id="taskStatus"
+															/>
+															<label class="form-check-label" for="">
+																Review
+															</label>
+														</div>
+														<div class="form-check-inline">
+															<input
+																class="form-check-input"
+																type="checkbox"
+																value="Done"
+																id="taskStatus"
+															/>
+															<label class="form-check-label" for="">
+																Done
+															</label>
+														</div>
+													</div>
+
+													<!-- Status checkbox code end -->
+													<button
+														type="submit"
+														class="btn btn-outline-success .btn-sm"
+														id="createTaskBtn"
+													>
+														Create new task
+													</button>
+												</form>
 											</div>
+
 											<div class="modal-footer">
 												<button
 													type="button"
