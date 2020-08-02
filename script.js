@@ -1,3 +1,6 @@
+let tasksDB = [];
+let currentid = 1;
+
 const taskContainer = document.querySelector("#tasks");
 
 const taskModalSaveButton = document.querySelector("#createTaskBtn");
@@ -7,15 +10,60 @@ const tableBody = document.querySelector("#tableBody");
 taskModalSaveButton.addEventListener("click", saveButtonClicked);
 
 function saveButtonClicked() {
+	let status = document.getElementById("taskStatus");
+
 	const name = document.querySelector("#taskName").value;
 	const date = document.querySelector("#taskDate").value;
 	const time = document.querySelector("#taskTime").value;
 	const assigned = document.querySelector("#taskAssigned").value;
 	const description = document.querySelector("#taskDescription").value;
-	addTask(name, date, time, assigned, description);
-}
 
-function addTask(name, date, time, assigned, description) {
+	// Checkbox ticked function - to see which option is ticked
+	function checkBoxTicked() {
+		var i;
+		for (i = 0; i < taskStatus.length; i++) {
+			if (taskStatus[i].checked) {
+				status = taskStatus[i].value;
+			}
+		}
+	}
+	// Run Checkbox ticked function
+	checkBoxTicked();
+
+	console.log(status, name, date, time, assigned, description);
+
+	addTask(status, name, date, time, assigned, description);
+}
+// Validation code for disabling form submissions if there are invalid fields
+(function () {
+	"use strict";
+	window.addEventListener(
+		"load",
+		function () {
+			// Fetch all the forms we want to apply custom Bootstrap validation styles to
+			var forms = document.getElementsByClassName("needs-validation");
+			// Loop over them and prevent submission
+			var validation = Array.prototype.filter.call(forms, function (form) {
+				form.addEventListener(
+					"submit",
+					function (event) {
+						if (form.checkValidity() === false) {
+							event.preventDefault();
+							event.stopPropagation();
+						}
+						form.classList.add("was-validated");
+					},
+					false
+				);
+			});
+		},
+		false
+	);
+})();
+
+// Create task Table
+
+function addTask(status, name, date, time, assigned, description) {
 	let html = `
 		<tr>
 			<td>
@@ -28,7 +76,7 @@ function addTask(name, date, time, assigned, description) {
                         aria-haspopup="true"
                         aria-expanded="false"
                       >
-                      To Do
+                      ${status}
                       </button>
                       <div
                         class="dropdown-menu"
