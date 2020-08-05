@@ -1,5 +1,41 @@
-let tasksDB = [];
-let currentid = 1;
+class TaskManager {
+	constructor() {
+		this.tasks = [];
+		this.currentId = 1;
+	}
+	// addTask(status, name, date, assigned, description) {
+	// 	const task = new Task(
+	// 		this.currentId++,
+	// 		status,
+	// 		name,
+	// 		date,
+	// 		assigned,
+	// 		description
+	// 	);
+
+	// 	this.tasks.push(task);
+	// }
+	// getAllTasks() {
+	//let tasks = JSON.parse(this.taskList || "[]");
+	// 		return this.taskList;
+	// 	}
+
+	// 	getTasksByStatus() {}
+	// 	addTask(task) {}
+	// 	deleteTask(id) {}
+	// 	updateTask(id) {}
+	// 	assignTaskId(id, assgined) {}
+}
+class Task {
+	constructor(id, status, name, date, assigned, description) {
+		this.id = id;
+		this.status = status;
+		this.name = name;
+		this.date = date;
+		this.assigned = assigned;
+		this.description = description;
+	}
+}
 
 const taskContainer = document.querySelector("#tasks");
 
@@ -10,29 +46,15 @@ const tableBody = document.querySelector("#tableBody");
 taskModalSaveButton.addEventListener("click", saveButtonClicked);
 
 function saveButtonClicked() {
-	let status = document.getElementById("taskStatus");
+	const status = document.getElementById("taskStatus").value;
 
 	const name = document.querySelector("#taskName").value;
+
 	const date = document.querySelector("#taskDate").value;
-	const time = document.querySelector("#taskTime").value;
 	const assigned = document.querySelector("#taskAssigned").value;
 	const description = document.querySelector("#taskDescription").value;
 
-	// Checkbox ticked function - to see which option is ticked
-	function checkBoxTicked() {
-		var i;
-		for (i = 0; i < taskStatus.length; i++) {
-			if (taskStatus[i].checked) {
-				status = taskStatus[i].value;
-			}
-		}
-	}
-	// Run Checkbox ticked function
-	checkBoxTicked();
-
-	console.log(status, name, date, time, assigned, description);
-
-	addTask(status, name, date, time, assigned, description);
+	addTask(status, name, date, assigned, description);
 }
 // Validation code for disabling form submissions if there are invalid fields
 (function () {
@@ -40,17 +62,19 @@ function saveButtonClicked() {
 	window.addEventListener(
 		"load",
 		function () {
+			let createTaskBtn = document.querySelector("#createTaskBtn");
 			// Fetch all the forms we want to apply custom Bootstrap validation styles to
 			var forms = document.getElementsByClassName("needs-validation");
 			// Loop over them and prevent submission
 			var validation = Array.prototype.filter.call(forms, function (form) {
-				form.addEventListener(
-					"submit",
+				createTaskBtn.addEventListener(
+					"click",
 					function (event) {
 						if (form.checkValidity() === false) {
 							event.preventDefault();
 							event.stopPropagation();
 						}
+
 						form.classList.add("was-validated");
 					},
 					false
@@ -63,7 +87,7 @@ function saveButtonClicked() {
 
 // Create task Table
 
-function addTask(status, name, date, time, assigned, description) {
+function addTask(status, name, date, assigned, description) {
 	let html = `
 		<tr>
 			<td>
@@ -93,7 +117,6 @@ function addTask(status, name, date, time, assigned, description) {
 			<td>${description}</td>
 			<td>${assigned}</td>
 			<td>${date}</td>
-			<td>${time}</td>
 			<td><button
 			type="button"
 			class="btn btn-outline-warning .btn-sm"
@@ -132,4 +155,56 @@ function addTask(status, name, date, time, assigned, description) {
 	range.selectNodeContents(tbody);
 	const taskElement = range.createContextualFragment(html);
 	tableBody.append(taskElement);
+	const task = new Task(
+		this.currentId++,
+		status,
+		name,
+		date,
+		assigned,
+		description
+	);
+
+	this.tasks.push(task);
 }
+
+// Generate some sample tasks
+
+addTask(
+	"To Do",
+	"Task abcd",
+	"2020-09-20",
+	"Nigel Bartholomeusz",
+	"Description of task abcd"
+);
+
+// addTask(
+// 	"Review",
+// 	"Task cdef",
+// 	"2020-09-20",
+// 	"Nigel Bartholomeusz",
+// 	"Description of task cdef"
+// );
+
+// addTask(
+// 	"Pending",
+// 	"Task ghij",
+// 	"2020-09-20",
+// 	"Nigel Bartholomeusz",
+// 	"Description of task ghij"
+// );
+
+// addTask(
+// 	"Done",
+// 	"Task klmn",
+// 	"2020-08-20",
+// 	"Nigel Bartholomeusz",
+// 	"Description of task klmn"
+// );
+
+// addTask(
+// 	"To Do",
+// 	"Task opqr",
+// 	"2020-10-21",
+// 	"Nigel Bartholomeusz",
+// 	"Description of task opqr"
+// );
