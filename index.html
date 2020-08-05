@@ -37,7 +37,7 @@
 							<th>Description</th>
 							<th>Assigned to</th>
 							<th>Due Date</th>
-							<th>Time</th>
+
 							<th>
 								<!-- Create Task button code-->
 								<button
@@ -62,8 +62,10 @@
 													<span aria-hidden="true">&times;</span>
 												</button>
 											</div>
-											<div class="modal-body">
+											<div class="modal-body" id="task-modal">
 												<!-- Start of Form-->
+
+												<!-- <form class="needs-validation" novalidate id="tasks"> -->
 
 												<form class="needs-validation" novalidate id="tasks">
 													<div class="form-group row">
@@ -84,6 +86,9 @@
 															/>
 															<div class="invalid-feedback">
 																Task name required - greater than 8 characters
+															</div>
+															<div class="valid-feedback">
+																Looks Good!
 															</div>
 														</div>
 													</div>
@@ -106,25 +111,7 @@
 															</div>
 														</div>
 													</div>
-													<div class="form-group row">
-														<label
-															for="example-date-input"
-															class="col-3 col-form-label"
-															>Time:</label
-														>
-														<div class="col-12">
-															<input
-																class="form-control"
-																type="time"
-																value=""
-																id="taskTime"
-																required
-															/>
-															<div class="invalid-feedback">
-																Time required
-															</div>
-														</div>
-													</div>
+
 													<div class="form-group row">
 														<label
 															for="example-text-input"
@@ -143,6 +130,9 @@
 															/>
 															<div class="invalid-feedback">
 																Assignee required - greater than 8 characters
+															</div>
+															<div class="valid-feedback">
+																Looks Good!
 															</div>
 														</div>
 													</div>
@@ -169,71 +159,40 @@
 																Description required - greater than 15
 																characters
 															</div>
+															<div class="valid-feedback">
+																Looks Good!
+															</div>
 														</div>
 													</div>
 
 													<!-- End of Form-->
-													<!-- Status Checkbox code -->
-													<h5>Status</h5>
 
-													<div class="form-group d-lg-inline-flex">
-														<div
-															class="form-check-inline custom-control custom-checkbox"
+													<!-- start of dropdown -->
+
+													<div class="form-group">
+														<label for="#taskSatus">Status</label>
+														<select
+															class="form-control"
+															id="taskStatus"
+															required
 														>
-															<input
-																class="form-check-input"
-																type="checkbox"
-																value="To Do"
-																id="taskStatus"
-																checked
-															/>
-															<label class="form-check-label" for="">
-																To Do
-															</label>
-														</div>
-														<div class="form-check-inline">
-															<input
-																class="form-check-input"
-																type="checkbox"
-																value="In Progress"
-																id="taskStatus"
-															/>
-															<label class="form-check-label" for="">
-																In Progress
-															</label>
-														</div>
-														<div class="form-check-inline">
-															<input
-																class="form-check-input"
-																type="checkbox"
-																value="Review"
-																id="taskStatus"
-															/>
-															<label class="form-check-label" for="">
-																Review
-															</label>
-														</div>
-														<div class="form-check-inline">
-															<input
-																class="form-check-input"
-																type="checkbox"
-																value="Done"
-																id="taskStatus"
-															/>
-															<label class="form-check-label" for="">
-																Done
-															</label>
-														</div>
-													</div>
+															<option value="To Do">To Do</option>
+															<option value="Review">Review</option>
+															<option value="Pending">Pending</option>
 
-													<!-- Status checkbox code end -->
-													<button
-														type="submit"
-														class="btn btn-outline-success .btn-sm"
-														id="createTaskBtn"
-													>
-														Create new task
-													</button>
+															<option value="Done">Done</option>
+														</select>
+													</div>
+													<!-- end of dropdown -->
+													<div>
+														<button
+															type="submit"
+															class="btn btn-outline-success .btn-sm"
+															id="createTaskBtn"
+														>
+															Create new task
+														</button>
+													</div>
 												</form>
 											</div>
 
