@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no"
+		/>
+		<!-- Bootstrap CSS -->
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+			integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+			crossorigin="anonymous"
+		/>
+		<!-- User CSS -->
+		<!-- <link href="styles.css" rel="stylesheet type="text/css"> -->
+		<title>Task Planner</title>
+	</head>
+	<!-- body -->
+	<body>
+		<div class="container-fluid col col-lg-12 col-md-8 col-sm-4">
+			<h1>
+				Task Planner
+			</h1>
+			<!-- Table begins-->
+
+			<div class="container-fluid justify-content-between">
+				<table
+					class="text-center table table-bordered table-striped table-hover"
+				>
+					<thead>
+						<tr>
+							<th>Status</th>
+							<th>Task name</th>
+							<th>Description</th>
+							<th>Assigned to</th>
+							<th>Due Date</th>
+
+							<th>
+								<!-- Create Task button code-->
+								<button
+									class="btn btn-outline-success .btn-sm"
+									data-toggle="modal"
+									data-target="#createTaskModal"
+								>
+									Create new Task
+								</button>
+								<!-- Start of modal-->
+								<div class="modal fade" id="createTaskModal">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title">Create Task</h5>
+												<button
+													type="button"
+													class="close"
+													data-dismiss="modal"
+													aria-label="Close"
+												>
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body" id="task-modal">
+												<!-- Start of Form-->
+
+												<!-- <form class="needs-validation" novalidate id="tasks"> -->
+
+												<form class="needs-validation" novalidate id="tasks">
+													<div class="form-group row">
+														<label
+															for="example-text-input"
+															class="col-3 col-form-label"
+															>Task:</label
+														>
+														<div class="col-12">
+															<input
+																class="form-control"
+																type="text"
+																value=""
+																id="taskName"
+																pattern="[A-Za-z]{8,}"
+																placeholder="Task name"
+																required
+															/>
+															<div class="invalid-feedback">
+																Task name required - greater than 8 characters
+															</div>
+															<div class="valid-feedback">
+																Looks Good!
+															</div>
+														</div>
+													</div>
+													<div class="form-group row">
+														<label
+															for="example-date-input"
+															class="col-3 col-form-label"
+															>Date:</label
+														>
+														<div class="col-12">
+															<input
+																class="form-control"
+																type="date"
+																value=""
+																id="taskDate"
+																required
+															/>
+															<div class="invalid-feedback">
+																Date required
+															</div>
+														</div>
+													</div>
+
+													<div class="form-group row">
+														<label
+															for="example-text-input"
+															class="col-3 col-form-label"
+															>Assigned:</label
+														>
+														<div class="col-12">
+															<input
+																class="form-control"
+																type="text"
+																value=""
+																id="taskAssigned"
+																pattern="[A-Za-z]{8,}"
+																placeholder="Assigned to"
+																required
+															/>
+															<div class="invalid-feedback">
+																Assignee required - greater than 8 characters
+															</div>
+															<div class="valid-feedback">
+																Looks Good!
+															</div>
+														</div>
+													</div>
+
+													<div class="form-group row">
+														<label
+															for="example-text-input"
+															class="col-3 col-form-label"
+															>Description:</label
+														>
+														<div class="col-12">
+															<input
+																class="form-control"
+																type="text"
+																value=""
+																id="taskDescription"
+																pattern="[A-Za-z]{15,}"
+																placeholder="Description of task"
+																rows="3"
+																required
+															/>
+
+															<div class="invalid-feedback">
+																Description required - greater than 15
+																characters
+															</div>
+															<div class="valid-feedback">
+																Looks Good!
+															</div>
+														</div>
+													</div>
+
+													<!-- End of Form-->
+
+													<!-- start of dropdown -->
+
+													<div class="form-group">
+														<label for="#taskSatus">Status</label>
+														<select
+															class="form-control"
+															id="taskStatus"
+															required
+														>
+															<option value="To Do">To Do</option>
+															<option value="Review">Review</option>
+															<option value="Pending">Pending</option>
+
+															<option value="Done">Done</option>
+														</select>
+													</div>
+													<!-- end of dropdown -->
+													<div>
+														<button
+															type="submit"
+															class="btn btn-outline-success .btn-sm"
+															id="createTaskBtn"
+														>
+															Create new task
+														</button>
+													</div>
+												</form>
+											</div>
+
+											<div class="modal-footer">
+												<button
+													type="button"
+													class="btn btn-outline-secondary"
+													data-dismiss="modal"
+												>
+													Close
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- End of modal-->
+							</th>
+						</tr>
+					</thead>
+					<tbody id="tableBody">
+						<!-- <tr>
+							<td>To Do</td>
+							<td>CSS update</td>
+							<td>Update CSS code in styles.css file</td>
+							<td>Wannabes</td>
+							<td>08/08/2020</td>
+							<td>11:00 pm</td>
+							<td>Edit</td>
+						</tr> -->
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- Table end-->
+		<footer class="text-center">Created with &hearts; by the wanabes</footer>
+
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script
+			src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+			integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+			integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+			integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+			crossorigin="anonymous"
+		></script>
+		<!-- User JavaScript -->
+		<script src="./script.js"></script>
+	</body>
+</html>
