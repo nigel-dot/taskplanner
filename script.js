@@ -164,7 +164,7 @@ function addTask(status, name, date, assigned, description) {
 		description
 	);
 
-	this.tasks.push(task);
+	// this.tasks.push(task);
 }
 
 // EventTarget.addEventListener("click"){
