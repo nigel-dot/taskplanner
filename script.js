@@ -144,7 +144,7 @@ function addTask(status, name, date, assigned, description) {
 			  </div>
 			  <div class="modal-footer">
 			  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-			  <button type="button" class="btn btn-outline-danger">Delete</button>
+			  <button type="button" id="deleteBtn" class="btn btn-outline-danger">Delete</button>
 		  </td>
 		</tr>
 	`;
@@ -167,6 +167,9 @@ function addTask(status, name, date, assigned, description) {
 	this.tasks.push(task);
 }
 
+// EventTarget.addEventListener("click"){
+// 	console.log("delete performed")
+// };
 // Generate some sample tasks
 
 addTask(
