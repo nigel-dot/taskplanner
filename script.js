@@ -1,3 +1,4 @@
+const taskContainer = document.querySelector("#tasks");
 class TaskManager {
 	constructor() {
 		this.tasks = [];
@@ -36,8 +37,6 @@ class Task {
 		this.description = description;
 	}
 }
-
-const taskContainer = document.querySelector("#tasks");
 
 const taskModalSaveButton = document.querySelector("#createTaskBtn");
 
@@ -90,41 +89,19 @@ function saveButtonClicked() {
 function addTask(status, name, date, assigned, description) {
 	let html = `
 		<tr>
-			<td>
-			<div class="dropright">
-                      <button
-                        class="btn dropdown-toggle btn-outline-info"
-                        type="button"
-                        id="dropdownMenuButton"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                      ${status}
-                      </button>
-                      <div
-                        class="dropdown-menu"
-                        aria-labelledby="dropdownMenuButton"
-                      >
-                      <a class="dropdown-item" href="#">To Do</a>
-                      <a class="dropdown-item" href="#">In Progress</a>
-                      <a class="dropdown-item" href="#">Review</a>
-                      <a class="dropdown-item" href="#">Done</a>
-                      </div>
-                    </div>
-			</td>
+			<td>${status}</td>
 			<td>${name}</td>
 			<td>${description}</td>
 			<td>${assigned}</td>
 			<td>${date}</td>
 			<td><button
-			type="button"
+			type="button" id="editTaskBtn"
 			class="btn btn-outline-warning .btn-sm"
 		  >
 			Edit
 		  </button>
 		  <button
-			type="button"
+			type="button" 
 			class="btn btn-outline-danger .btn-sm"
 			data-toggle="modal" data-target="#confirmdelete"
 		  >
@@ -144,7 +121,7 @@ function addTask(status, name, date, assigned, description) {
 			  </div>
 			  <div class="modal-footer">
 			  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-			  <button type="button" id="deleteBtn" class="btn btn-outline-danger">Delete</button>
+			  <button type="button" id="deleteTaskBtn" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
 		  </td>
 		</tr>
 	`;
@@ -163,13 +140,46 @@ function addTask(status, name, date, assigned, description) {
 		assigned,
 		description
 	);
+	// delete function
+	deleteTaskBtn.addEventListener("click", function (event) {
+		console.log("delete performed");
+	});
+
+	// edit function
+	editTaskBtn.addEventListener("click", function (event) {
+		console.log("edit performed");
+	});
+
+	// taskTitle.addEventListener("input", function (event) {
+	// 	validation(event.target, notEmptyandLongerThan(event.target.value, 8));
+	// });
 
 	// this.tasks.push(task);
 }
+// Store items to local storage
 
-// EventTarget.addEventListener("click"){
-// 	console.log("delete performed")
-// };
+// localStorage.setItem('id',
+// 'status',
+// 'name',
+// 'date',
+// 'assigned',
+// 'description')
+
+// Get items from local storage
+
+// localStorage.getItem('id',
+// 'status',
+// 'name',
+// 'date',
+// 'assigned',
+// 'description')
+
+// Remove items from local storage
+// localStorage.removeItem('id')
+
+// Clears items from local storage
+// localStorage.clear()
+
 // Generate some sample tasks
 
 addTask(
@@ -179,7 +189,6 @@ addTask(
 	"Nigel Bartholomeusz",
 	"Description of task abcd"
 );
-
 // addTask(
 // 	"Review",
 // 	"Task cdef",
