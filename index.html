@@ -22,7 +22,7 @@
 	<body>
 		<div class="container-fluid col col-lg-12 col-md-8 col-sm-4">
 			<h1>
-				Test Planner
+				Task Planner
 			</h1>
 			<!-- Table begins-->
 
@@ -40,13 +40,32 @@
 
 							<th>
 								<!-- Create Task button code-->
+
 								<button
-									class="btn btn-outline-success .btn-sm"
+									class="btn btn-outline-success"
 									data-toggle="modal"
 									data-target="#createTaskModal"
 								>
-									Create new Task
+									Create New Task
 								</button>
+
+								<button
+									class="btn dropdown-toggle btn-outline-info"
+									type="button"
+									id="dropdownMenuButton"
+									data-toggle="dropdown"
+									aria-haspopup="true"
+									aria-expanded="false"
+								>
+									Filter
+								</button>
+								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+									<a class="dropdown-item" href="#">To Do</a>
+									<a class="dropdown-item" href="#">In Progress</a>
+									<a class="dropdown-item" href="#">Review</a>
+									<a class="dropdown-item" href="#">Done</a>
+								</div>
+
 								<!-- Start of modal-->
 								<div class="modal fade" id="createTaskModal">
 									<div class="modal-dialog" role="document">
