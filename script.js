@@ -1,4 +1,4 @@
-const TASKS_LIST = [];
+const tasksArray = [];
 
 class Task {
 	constructor(id, status, name, description, assignedTo, dueDate) {
@@ -13,15 +13,15 @@ class Task {
 
 class TaskManager {
 	constructor() {
-		this.currentId = TASKS_LIST.length || 1;
+		this.currentId = tasksArray.length || 1;
 	}
 
 	getAllTasks() {
 		//let tasks = JSON.parse(this.taskList || "[]");
-		let itemHTML = "";
-		if (TASKS_LIST.length) {
-			const renderList = TASKS_LIST.map(function (task) {
-				itemHTML += `
+		let html = "";
+		if (tasksArray.length) {
+			const renderList = tasksArray.map(function (task) {
+				html += `
 	<tr>
 		<td>${task.status}</td>
 		<td>${task.name}</td>
@@ -65,18 +65,14 @@ class TaskManager {
 				table.appendChild(tbody);
 				const range = document.createRange();
 				range.selectNodeContents(tbody);
-				const taskElement = range.createContextualFragment(itemHTML);
+				const taskElement = range.createContextualFragment(html);
 				tableBody.append(taskElement);
 			});
 		} else {
-			itemHTML = "";
+			html = "";
 		}
-		return itemHTML;
+		return html;
 	}
-
-	// Call addTask Function
-
-	// getTasksByStatus() { }
 
 	addTask(status, name, description, assignedTo, dueDate) {
 		const task = new Task(
@@ -88,23 +84,27 @@ class TaskManager {
 			dueDate
 		);
 		// push new task onto the tasks array
-		TASKS_LIST.push(task);
-		console.log(TASKS_LIST);
+		tasksArray.push(task);
+		console.log(tasksArray);
 	}
-}
 
-// delete function
-// document
-// 	.querySelector("#deleteTaskBtn")
-// 	.addEventListener("click", function (event) {
-// 		console.log("delete performed task ID:");
-// 	});
-// 	// edit function
-// 	document
-// 		.querySelector("#editTaskBtn")
-// 		.addEventListener("click", function (event) {
-// 			console.log("edit performed");
-// 		});
+	// Delete task Method
+	deleteTask(id) {
+		// ** find the array index which contains that id then remove from array **
+		//  ** use array.splice method here to delete then do the same as addtask to rendertasks **
+		console.log(id);
+	}
+
+	// Update task Method
+	upadateTask(id) {}
+
+	// Assign task Method
+	assignTask(task) {}
+
+	// Gettask by status Method
+
+	getTaskByStatus() {}
+}
 
 // Begin DOM manipulation block
 document.addEventListener("DOMContentLoaded", function () {
@@ -117,14 +117,21 @@ document.addEventListener("DOMContentLoaded", function () {
 		//itemsContainer.innerHTML = "";
 		itemsContainer.innerHTML = taskList;
 		// get all <i> elements within the task list and attach click event listener
-		let deleteIcons = document.querySelectorAll("i.fa-trash");
+
+		let deleteTask = document.querySelectorAll("#deleteTaskBtn");
+
 		// loop over deletions and attach click event listener
-		const eventSetup = Array.prototype.filter.call(deleteIcons, function (el) {
+		const eventSetup = Array.prototype.filter.call(deleteTask, function (el) {
 			el.addEventListener(
 				"click",
 				function (event) {
+					console.log("Delete Task Confirm Button Clicked");
+					// ** might not be .task was .card for Michael - might need to be put in table as hidden to find id**
 					let taskElement = event.target.closest(".task");
-					handleDeleteTask(taskElement);
+
+					TaskManager.deleteTask(taskElement.id);
+					console.log(taskElement.id);
+					renderTasks();
 				},
 				false
 			);
