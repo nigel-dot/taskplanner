@@ -15,225 +15,74 @@ class Task {
 class TaskManager {
 	constructor() {
 		this.tasks = [];
-		this.currentId = parseInt(localStorage.getItem("currentId")) || 1;
-		localStorage.setItem("currentId", this.currentId);
+		this.currentId = 1;
+		// this.currentId = parseInt(localStorage.getItem("currentId")) || 1;
+		// localStorage.setItem("currentId", this.currentId);
 	}
 
 	// Build HTML and add to table Method
 
 	getAllTasks() {
+		console.log(this.tasks);
 		// get tasks from local storage
 		//let myNewTasks = JSON.parse(window.localStorage.getItem("mytasks"));
 		// if (myNewTasks) {
 		// 	for (let i = 0; i < myNewTasks.length; i++) {
 		let html = "";
 		if (this.tasks.length) {
-			const renderList = this.tasks.map(function (task) {
-				html += `
-<div class="task">
-	<tr>
-		<td>
-		    <div class="btn-group dropright">
-		<button
-									class="btn dropright dropdown-toggle btn-outline-info"
-									type="button"
-									id="dropdownMenuButton"
-									data-toggle="dropdown"
-									aria-haspopup="true"
-									aria-expanded="false"
-								>
+			this.tasks.forEach(function (task) {
+				html = `
+				<div class="task">
+				<tr>
+					<td>
+						<div class="btn-group dropright">
+							<button
+								class="btn dropright dropdown-toggle btn-outline-info"
+								type="button"
+								id="dropdownMenuButton"
+								data-toggle="dropdown"
+								aria-haspopup="true"
+								aria-expanded="false"
+							>
 								${task.status}
-								</button>
-								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-									<a class="dropdown-item" href="#">To Do</a>
-									<a class="dropdown-item" href="#">In Progress</a>
-									<a class="dropdown-item" href="#">Review</a>
-									<a class="dropdown-item" href="#">Done</a>
-								</div>
-			</div>
-		</td>
-		<td>${task.name}</td>
-		<td>${task.description}</td>
-		<td>${task.assignedTo}</td>
-		<td>${task.dueDate}</td>
-		<td><button
-		type="button" 
-		class="btn btn-outline-warning .btn-sm"
-		id="updateTaskBtn"
-		data-toggle="modal" data-target="#updateTaskModal"
-	  >
-		Update
-	  </button>
-	  <!-- Start of modal-->
-	  <div class="modal fade" id="updateTaskModal">
-		  <div class="modal-dialog" role="document">
-			  <div class="modal-content">
-				  <div class="modal-header">
-					  <h5 class="modal-title">Update Task: ${task.id}</h5>
-					  <button
-					 
-						  type="button"
-						  class="close"
-						  data-dismiss="modal"
-						  aria-label="Close"
-					  >
-						  <span aria-hidden="true">&times;</span>
-					  </button>
-				  </div>
-				  <div class="modal-body" id="updTask-modal">
-					  <!-- Start of Form-->
-	  
-			
-	  
-					  <form class="needs-validation" id="updateTaskForm" novalidate>
-						  <div class="form-group row" id="updateTaskFormName">
-							  <label class="col-3 col-form-label">Task:</label>
-							  <div class="col-12">
-								  <input
-									  class="form-control"
-									  type="text"
-									  value="${task.name}"
-									  id="taskName"
-									  pattern="[A-Za-z]{8,}"
-									  placeholder="Task name"
-									  required
-								  />
-								  <div class="invalid-feedback">
-									  Task name required - greater than 8 characters
-								  </div>
-								  <div class="valid-feedback">
-									  Looks Good!
-								  </div>
-							  </div>
-						  </div>
-						  <div class="form-group row">
-							  <label class="col-3 col-form-label">Date:</label>
-							  <div class="col-12">
-								  <input
-									  class="form-control"
-									  type="date"
-									  value="${task.dueDate}"
-									  id="taskDueDate"
-									  required
-								  />
-								  <div class="invalid-feedback">
-									  Date required
-								  </div>
-							  </div>
-						  </div>
-	  
-						  <div class="form-group row">
-							  <label class="col-3 col-form-label">Assigned:</label>
-							  <div class="col-12">
-								  <input
-									  class="form-control"
-									  type="text"
-									  value="${task.assignedTo}"
-									  id="taskAssignedTo"
-									  pattern="[A-Za-z]{8,}"
-									  placeholder="Assigned to"
-									  required
-								  />
-								  <div class="invalid-feedback">
-									  Assignee required - greater than 8 characters
-								  </div>
-								  <div class="valid-feedback">
-									  Looks Good!
-								  </div>
-							  </div>
-						  </div>
-	  
-						  <div class="form-group row">
-							  <label class="col-3 col-form-label">Description:</label>
-							  <div class="col-12">
-								  <input
-									  class="form-control"
-									  type="text"
-									  value="${task.description}"
-									  id="taskDescription"
-									  pattern="[A-Za-z]{15,}"
-									  placeholder="Description of task"
-									  rows="3"
-									  required
-								  />
-	  
-								  <div class="invalid-feedback">
-									  Description required - greater than 15 characters
-								  </div>
-								  <div class="valid-feedback">
-									  Looks Good!
-								  </div>
-							  </div>
-						  </div>
-	  
-						  <!-- End of Form-->
-	  
-						  <!-- start of dropdown -->
-	  
-						  <div class="form-group">
-							  <label>Status</label>
-							  <select class="form-control" id="taskStatus" required>
-								  <option value="To Do">To Do</option>
-								  <option value="Review">Review</option>
-								  <option value="Pending">Pending</option>
-								  <option value="Done">Done</option>
-							  </select>
-						  </div>
-						  <!-- end of dropdown -->
-						  <div>
-							  <button
-								  type="submit"
-								  class="btn btn-outline-success .btn-sm"
-								  data-dismiss="modal"
-								  value="${task.id}"
-								  id="modalUpdateTaskBtn"
-							  >
-								  Update task
-							  </button>
-						  </div>
-					  </form>
-				  </div>
-	  
-				  <div class="modal-footer">
-					  <button
-						  type="button"
-						  class="btn btn-outline-secondary"
-						  data-dismiss="modal"
-					  >
-						  Close
-					  </button>
-				  </div>
-			  </div>
-		  </div>
-	  </div>
-	  
-	  <!-- End of modal-->
-	  <button
-		type="button" 
-		class="btn btn-outline-danger .btn-sm"
-		data-toggle="modal" data-target="#confirmdelete"
-	  >
-		Delete
-	  </button>
-	  <div class="modal fade" id="confirmdelete" tabindex="-1" role="dialog" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-		<div class="modal-content">
-		  <div class="modal-header">
-			<h5 class="modal-title">Confirm</h5>
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			  <span aria-hidden="true">&times;</span>
-			</button>
-		  </div>
-		  <div class="modal-body id=deleteModal">
-		   Do you want to delete task : ${task.id}
-		  </div>
-		  <div class="modal-footer">
-		  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-		  <button type="button" id="deleteTaskBtn" value="${task.id}" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
-	  </td>
-	</tr>
-</div>
-`;
+							</button>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								<a class="dropdown-item" href="#">To Do</a>
+								<a class="dropdown-item" href="#">In Progress</a>
+								<a class="dropdown-item" href="#">Review</a>
+								<a class="dropdown-item" href="#">Done</a>
+							</div>
+						</div>
+					</td>
+					<td>${task.name}</td>
+					<td>${task.description}</td>
+					<td>${task.assignedTo}</td>
+					<td>${task.dueDate}</td>
+					<td>
+						<button
+							type="button"
+							class="btn btn-outline-warning .btn-sm"
+							id="updateTaskBtn"
+							data-toggle="modal"
+							data-target="#updateTaskModal"
+						>
+							Update
+						</button>
+					</td>
+					<td>
+						<button
+							type="button"
+							value="${task.id}"
+							class="deleteTaskBtn btn btn-outline-danger .btn-sm"
+							data-toggle="modal"
+							data-target="#confirmdelete"
+						>
+							Delete
+						</button>
+					</td>
+				   </tr>
+			     </div>			
+                `;
 				const tableBody = document.querySelector("#tableBody");
 				const table = document.createElement(`table`);
 				const tbody = document.createElement(`tbody`);
@@ -246,7 +95,6 @@ class TaskManager {
 		} else {
 			html = "";
 		}
-		return html;
 	}
 
 	// Add task Method
@@ -260,6 +108,8 @@ class TaskManager {
 			assignedTo,
 			dueDate
 		);
+
+		console.log("this.currentId:", this.currentId);
 		// push new task onto the tasks array
 		this.tasks.push(task);
 
@@ -281,10 +131,12 @@ class TaskManager {
 				this.tasks.splice(i, 1);
 
 				// delete from local storage
-				//console.log(myNewTasks);
+
 				let myNewTasks = JSON.parse(localStorage.getItem("mytasks"));
+				console.log("myNewTasks:", myNewTasks);
 				myNewTasks.splice(i, 1);
 				localStorage.setItem("mytasks", JSON.stringify(myNewTasks));
+
 				break;
 			}
 		}
@@ -322,235 +174,12 @@ class TaskManager {
 				// myNewTasks[i].assignedTo = assignedTo;
 				// myNewTasks[i].dueDate = dueDate;
 				// localStorage.setItem("mytasks", JSON.stringify(myNewTasks));
-				// break;
+				break;
 			}
 		}
 		return updated_id;
 	}
 
-	// Display all tasks from local Storage
-
-	displayAllTasksFromStorage() {
-		let myNewTasks = JSON.parse(window.localStorage.getItem("mytasks"));
-		let html = "";
-		if (myNewTasks) {
-			for (let i = 0; i < myNewTasks.length; i++) {
-				html = `
-				<div class="task" id="${myNewTasks[i].id}">
-					<tr>
-						<td>
-							<div class="btn-group dropright">
-						<button
-													class="btn dropright dropdown-toggle btn-outline-info"
-													type="button"
-													id="dropdownMenuButton"
-													data-toggle="dropdown"
-													aria-haspopup="true"
-													aria-expanded="false"
-												>
-												${myNewTasks[i].status}
-												</button>
-												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-													<a class="dropdown-item" href="#">To Do</a>
-													<a class="dropdown-item" href="#">In Progress</a>
-													<a class="dropdown-item" href="#">Review</a>
-													<a class="dropdown-item" href="#">Done</a>
-												</div>
-							</div>
-						</td>
-						<td>${myNewTasks[i].name}</td>
-						<td>${myNewTasks[i].description}</td>
-						<td>${myNewTasks[i].assignedTo}</td>
-						<td>${myNewTasks[i].dueDate}</td>
-						<td><button
-						type="button" id="updateTaskBtn"
-						class="btn btn-outline-warning .btn-sm"
-						data-toggle="modal" data-target="#updateTaskModal"
-					  >
-						Update
-					  </button>
-					  <!-- Start of modal-->
-					  <div class="modal fade" id="updateTaskModal">
-						  <div class="modal-dialog" role="document">
-							  <div class="modal-content">
-								  <div class="modal-header">
-									  <h5 class="modal-title">Update Task</h5>
-									  <button
-										  type="button"
-										  class="close"
-										  data-dismiss="modal"
-										  aria-label="Close"
-									  >
-										  <span aria-hidden="true">&times;</span>
-									  </button>
-								  </div>
-								  <div class="modal-body" id="updTask-modal">
-									  <!-- Start of Form-->
-					  
-							
-					  
-									  <form class="needs-validation" novalidate>
-										  <div class="form-group row">
-											  <label class="col-3 col-form-label">Task:</label>
-											  <div class="col-12">
-												  <input
-													  class="form-control"
-													  type="text"
-													  value=""
-													  id="taskName"
-													  pattern="[A-Za-z]{8,}"
-													  placeholder="Task name"
-													  required
-												  />
-												  <div class="invalid-feedback">
-													  Task name required - greater than 8 characters
-												  </div>
-												  <div class="valid-feedback">
-													  Looks Good!
-												  </div>
-											  </div>
-										  </div>
-										  <div class="form-group row">
-											  <label class="col-3 col-form-label">Date:</label>
-											  <div class="col-12">
-												  <input
-													  class="form-control"
-													  type="date"
-													  value=""
-													  id="taskDueDate"
-													  required
-												  />
-												  <div class="invalid-feedback">
-													  Date required
-												  </div>
-											  </div>
-										  </div>
-					  
-										  <div class="form-group row">
-											  <label class="col-3 col-form-label">Assigned:</label>
-											  <div class="col-12">
-												  <input
-													  class="form-control"
-													  type="text"
-													  value=""
-													  id="taskAssignedTo"
-													  pattern="[A-Za-z]{8,}"
-													  placeholder="Assigned to"
-													  required
-												  />
-												  <div class="invalid-feedback">
-													  Assignee required - greater than 8 characters
-												  </div>
-												  <div class="valid-feedback">
-													  Looks Good!
-												  </div>
-											  </div>
-										  </div>
-					  
-										  <div class="form-group row">
-											  <label class="col-3 col-form-label">Description:</label>
-											  <div class="col-12">
-												  <input
-													  class="form-control"
-													  type="text"
-													  value=""
-													  id="taskDescription"
-													  pattern="[A-Za-z]{15,}"
-													  placeholder="Description of task"
-													  rows="3"
-													  required
-												  />
-					  
-												  <div class="invalid-feedback">
-													  Description required - greater than 15 characters
-												  </div>
-												  <div class="valid-feedback">
-													  Looks Good!
-												  </div>
-											  </div>
-										  </div>
-					  
-										  <!-- End of Form-->
-					  
-										  <!-- start of dropdown -->
-					  
-										  <div class="form-group">
-											  <label>Status</label>
-											  <select class="form-control" id="taskStatus" required>
-												  <option value="To Do">To Do</option>
-												  <option value="Review">Review</option>
-												  <option value="Pending">Pending</option>
-												  <option value="Done">Done</option>
-											  </select>
-										  </div>
-										  <!-- end of dropdown -->
-										  <div>
-											  <button
-												  type="submit"
-												  class="btn btn-outline-success .btn-sm"
-												  data-dismiss="modal"
-												  id="updateTaskBtn"
-											  >
-												  Update task
-											  </button>
-										  </div>
-									  </form>
-								  </div>
-					  
-								  <div class="modal-footer">
-									  <button
-										  type="button"
-										  class="btn btn-outline-secondary"
-										  data-dismiss="modal"
-									  >
-										  Close
-									  </button>
-								  </div>
-							  </div>
-						  </div>
-					  </div>
-					  
-					  <!-- End of modal-->
-					  <button
-						type="button" 
-						class="btn btn-outline-danger .btn-sm"
-						data-toggle="modal" data-target="#confirmdelete"
-					  >
-						Delete
-					  </button>
-					  <div class="modal fade" id="confirmdelete" tabindex="-1" role="dialog" aria-hidden="true">
-					  <div class="modal-dialog" role="document">
-						<div class="modal-content">
-						  <div class="modal-header">
-							<h5 class="modal-title">Confirm</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							  <span aria-hidden="true">&times;</span>
-							</button>
-						  </div>
-						  <div class="modal-body id=deleteModal">
-						   Do you want to delete task : ${myNewTasks[i].id}
-						  </div>
-						  <div class="modal-footer">
-						  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-						  <button type="button" id="deleteTaskBtn" value="${myNewTasks[i].id}" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
-					  </td>
-					</tr>
-				</div>
-				`;
-				const tableBody = document.querySelector("#tableBody");
-				const table = document.createElement(`table`);
-				const tbody = document.createElement(`tbody`);
-				table.appendChild(tbody);
-				const range = document.createRange();
-				range.selectNodeContents(tbody);
-				const taskElement = range.createContextualFragment(html);
-				tableBody.append(taskElement);
-			}
-		} else {
-			html = "";
-		}
-		return html;
-	}
 	// Filter task Method
 
 	filterTask() {}
@@ -568,28 +197,22 @@ document.addEventListener("DOMContentLoaded", function () {
 		//clear any exsisting HTML
 		const itemsContainer = document.getElementById("tableBody");
 		const taskList = taskManager.getAllTasks();
-		//const taskList = taskManager.displayAllTasksFromStorage();
 		//itemsContainer.innerHTML = "";
 		itemsContainer.innerHTML = taskList;
-		// console.log(
-		// 	"taskmaanger:",
-		// 	taskManager,
-		// 	"tasklist:",
-		// 	taskList,
-		// 	"itemscontainer:",
-		// 	itemsContainer
-		// );
+		console.log("taskmanger:", taskManager, "Task:", Task);
 
 		// Look for Delete button being clicked
 
-		let deleteTask = document.querySelectorAll("#deleteTaskBtn");
+		let deleteBtns = document.querySelectorAll("#deleteTaskBtn");
 
 		// loop over deletions and attach click event listener
-		const deleteSetup = Array.prototype.filter.call(deleteTask, function (el) {
+		const deleteSetup = Array.prototype.filter.call(deleteBtns, function (el) {
 			el.addEventListener(
 				"click",
 				function (event) {
-					let deleteId = event.target.closest("#deleteTaskBtn").value;
+					let deleteId = event.target.value;
+					console.log(event.target.value);
+
 					taskManager.deleteTask(deleteId);
 
 					renderTasks();
