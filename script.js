@@ -23,65 +23,70 @@ class TaskManager {
 	// Build HTML and add to table Method
 
 	getAllTasks() {
-		console.log(this.tasks);
+		// console.log("get all task method", this.tasks);
 		// get tasks from local storage
 		//let myNewTasks = JSON.parse(window.localStorage.getItem("mytasks"));
 		// if (myNewTasks) {
+
 		// 	for (let i = 0; i < myNewTasks.length; i++) {
+
 		let html = "";
 		if (this.tasks.length) {
+			console.log("task length:", this.tasks.length);
 			this.tasks.forEach(function (task) {
-				html = `
-				<div class="task">
-				<tr>
-					<td>
-						<div class="btn-group dropright">
-							<button
-								class="btn dropright dropdown-toggle btn-outline-info"
-								type="button"
-								id="dropdownMenuButton"
-								data-toggle="dropdown"
-								aria-haspopup="true"
-								aria-expanded="false"
-							>
-								${task.status}
-							</button>
-							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								<a class="dropdown-item" href="#">To Do</a>
-								<a class="dropdown-item" href="#">In Progress</a>
-								<a class="dropdown-item" href="#">Review</a>
-								<a class="dropdown-item" href="#">Done</a>
-							</div>
-						</div>
-					</td>
-					<td>${task.name}</td>
-					<td>${task.description}</td>
-					<td>${task.assignedTo}</td>
-					<td>${task.dueDate}</td>
-					<td>
+				html += `
+		<div class="task">
+			<tr>
+				<td>
+					<div class="btn-group dropright">
 						<button
-							type="button"
-							class="btn btn-outline-warning .btn-sm"
-							id="updateTaskBtn"
-							data-toggle="modal"
-							data-target="#updateTaskModal"
-						>
-							Update
-						</button>
-					</td>
-					<td>
-						<button
+							class="btn dropright dropdown-toggle btn-outline-info"
 							type="button"
 							value="${task.id}"
-							class="deleteTaskBtn btn btn-outline-danger .btn-sm"
-							data-toggle="modal"
-							data-target="#confirmdelete"
+							id="dropdownMenuButton"
+							data-toggle="dropdown"
+							aria-haspopup="true"
+							aria-expanded="false"
 						>
-							Delete
+							${task.status}
 						</button>
-					</td>
-				   </tr>
-			     </div>			
+						<div
+							class="dropdown-menu selectStatus"
+							aria-labelledby="dropdownMenuButton"
+						>
+							<a class="dropdown-item">To Do</a>
+							<a class="dropdown-item">In Progress</a>
+							<a class="dropdown-item">Review</a>
+							<a class="dropdown-item">Done</a>
+						</div>
+					</div>
+				</td>
+				<td>${task.name}</td>
+				<td>${task.description}</td>
+				<td>${task.assignedTo}</td>
+				<td>${task.dueDate}</td>
+				<td>
+					<button
+						type="button"
+						class="updateTaskBtn btn btn-outline-warning .btn-sm"
+						value="${task.id}"
+						data-toggle="modal"
+						data-target="#createTaskModal"
+					>
+						Update
+					</button>
+				
+
+					<button
+						type="button"
+						value="${task.id}"
+						class="deleteTaskBtn btn btn-outline-danger .btn-sm"
+					>
+						Delete
+					</button>
+				</td>
+			</tr>
+		</div>
                 `;
 				const tableBody = document.querySelector("#tableBody");
 				const table = document.createElement(`table`);
@@ -95,11 +100,14 @@ class TaskManager {
 		} else {
 			html = "";
 		}
+		return html;
 	}
 
 	// Add task Method
 
 	addTask(status, name, description, assignedTo, dueDate) {
+		// change createTaskBtn button to be called create new task
+		createTaskBtn.innerText = "Create new task";
 		const task = new Task(
 			`task` + this.currentId++,
 			status,
@@ -109,7 +117,7 @@ class TaskManager {
 			dueDate
 		);
 
-		console.log("this.currentId:", this.currentId);
+		console.log("this.currentId:", this.currentId, "this tasks:", this.tasks);
 		// push new task onto the tasks array
 		this.tasks.push(task);
 
@@ -142,8 +150,8 @@ class TaskManager {
 		}
 
 		// tasksArray = tasksArray.filter((Task) => Task.id !== id);
-		console.log("Made it to Delete Task method");
-		console.log("task id:", id);
+		// console.log("Made it to Delete Task method");
+		// console.log("task id:", id);
 
 		//task = task.filter((task) => task.id !== id);
 	}
@@ -153,7 +161,11 @@ class TaskManager {
 	updateTask(id, status, name, description, assignedTo, dueDate) {
 		let updated_id = "";
 		console.log("made it to update task method");
-		console.log("vars", id, status, name, description, assignedTo, dueDate);
+
+		// change createTaskBtn button to be called update task
+		createTaskBtn.innerText = "Update Task";
+
+		// console.log("vars", id, status, name, description, assignedTo, dueDate);
 
 		for (let i = 0; i < this.tasks.length; i++) {
 			if (this.tasks[i].id === id) {
@@ -186,24 +198,42 @@ class TaskManager {
 
 	// Gettask by status Method
 
-	getTaskByStatus() {}
+	changeStatus(id, status) {
+		for (let i = 0; i < this.tasks.length; i++) {
+			if (this.tasks[i].id === id) {
+				// update the array
+				this.tasks[i].status = status;
+				console.log("made it to change status method");
+
+				//update local storage
+
+				// let myNewTasks = JSON.parse(localStorage.getItem("myTasks"));
+				// myNewTasks[i].status = status;
+
+				// localStorage.setItem("mytasks", JSON.stringify(myNewTasks));
+				break;
+			}
+		}
+		return status;
+	}
 }
 
 // Begin DOM manipulation block
 document.addEventListener("DOMContentLoaded", function () {
 	const taskManager = new TaskManager();
 	renderTasks();
+
 	function renderTasks() {
 		//clear any exsisting HTML
 		const itemsContainer = document.getElementById("tableBody");
 		const taskList = taskManager.getAllTasks();
 		//itemsContainer.innerHTML = "";
 		itemsContainer.innerHTML = taskList;
-		console.log("taskmanger:", taskManager, "Task:", Task);
+		// console.log("taskmanger:", taskManager, "Task:", Task);
 
 		// Look for Delete button being clicked
 
-		let deleteBtns = document.querySelectorAll("#deleteTaskBtn");
+		let deleteBtns = document.querySelectorAll(".deleteTaskBtn");
 
 		// loop over deletions and attach click event listener
 		const deleteSetup = Array.prototype.filter.call(deleteBtns, function (el) {
@@ -211,7 +241,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				"click",
 				function (event) {
 					let deleteId = event.target.value;
-					console.log(event.target.value);
+					// console.log(event.target.value);
 
 					taskManager.deleteTask(deleteId);
 
@@ -221,10 +251,39 @@ document.addEventListener("DOMContentLoaded", function () {
 			);
 		});
 
+		// Look for Change Status button being clicked
+
+		let changeStatusBtns = document.querySelectorAll(".dropdown-item");
+
+		// loop over change status and attach click event listener
+		const changeStatusSetup = Array.prototype.filter.call(
+			changeStatusBtns,
+			function (el) {
+				el.addEventListener(
+					"click",
+					function (event) {
+						// let changeStatusId = event.target.value;
+						let changeStatusId = 1;
+						let changeStatus = "Review";
+						// let changeStatus = document.getElementById(".selectStatus").value;
+						//let changeStatus = event.target.value;
+
+						console.log(changeStatusId, changeStatus);
+
+						console.log("change status button clicked");
+
+						taskManager.changeStatus(changeStatusId, changeStatus);
+
+						renderTasks();
+					},
+					false
+				);
+			}
+		);
+
 		// Look for Update button being clicked
 
-		//let updateTask = document.querySelectorAll("#modalUpdateTaskBtn");
-		let updateTask = document.querySelectorAll("#modalUpdateTaskBtn");
+		let updateTask = document.querySelectorAll(".updateTaskBtn");
 		console.log(updateTask);
 
 		// loop over updates and attach click event listener
@@ -232,26 +291,43 @@ document.addEventListener("DOMContentLoaded", function () {
 			el.addEventListener(
 				"click",
 				function (event) {
-					let editId = event.target.closest("#modalUpdateTaskBtn").value;
-					//let editName = event.target.closest("#updateTaskForm").value;
-					let editName = "taskname";
-					//let editName = ${ task.name };
-					//let editName = task.name;
+					let editId = event.target.value;
+					let editName = document.querySelector(".taskName").value;
+					let editStatus = document.querySelector(".taskStatus").value;
+					let editDescription = document.querySelector(".taskDescription")
+						.value;
+					let editAssignedTo = document.querySelector(".taskAssignedTo").value;
+					let editDueDate = document.querySelector(".taskDueDate").value;
+
+					let heditName = "Task Name";
+					let heditStatus = "Review";
+					let heditDescription = "task description";
+					let heditAssignedTo = "assignedto";
+					let heditDueDate = "2020-08-13";
+
 					console.log(
 						"Update Task Button Clicked",
 						"id:",
 						editId,
 						"name:",
-						editName
+						editName,
+						"status:",
+						editStatus,
+						"Description:",
+						editDescription,
+						"AssignedTo:",
+						editAssignedTo,
+						"DueDate:",
+						editDueDate
 					);
 
 					taskManager.updateTask(
 						editId,
-						"Review",
-						editName,
-						"task description",
-						"assignedto",
-						"2020-08-13"
+						heditStatus,
+						heditName,
+						heditDescription,
+						heditAssignedTo,
+						heditDueDate
 					);
 
 					renderTasks();
@@ -280,7 +356,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					let description = form.taskDescription.value;
 					let assignedTo = form.taskAssignedTo.value;
 					let dueDate = form.taskDueDate.value;
-
+					console.log("adding a task", this.tasks);
 					taskManager.addTask(status, name, description, assignedTo, dueDate);
 					renderTasks();
 				}
