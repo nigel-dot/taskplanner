@@ -42,7 +42,7 @@
 								<!-- Create Task button code-->
 
 								<button
-									class="btn btn-outline-success"
+									class="btn btn-outline-success createNewTaskBtn"
 									data-toggle="modal"
 									data-target="#createTaskModal"
 								>
@@ -87,6 +87,13 @@
 												<!-- <form class="needs-validation" novalidate id="tasks"> -->
 
 												<form class="needs-validation" novalidate>
+													<input
+														class="taskId"
+														type="text"
+														value=""
+														name="taskId"
+														hidden
+													/>
 													<div class="form-group row">
 														<label class="col-3 col-form-label">Task:</label>
 														<div class="col-12">
@@ -193,7 +200,7 @@
 													<div>
 														<button
 															type="submit"
-															class="btn btn-outline-success .btn-sm"
+															class="btn btn-outline-success .btn-sm createTaskBtn"
 															id="createTaskBtn"
 														>
 															Create new task
