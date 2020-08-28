@@ -1,3 +1,4 @@
+import Task from "./task.js";
 // Task Manager Class
 
 export default class TaskManager {
