@@ -14,8 +14,9 @@ class Task {
 
 class TaskManager {
 	constructor() {
-		this.tasks = [];
-		//this.currentId = 1;
+		// get tasks form local storage or set to empty array
+		this.tasks = JSON.parse(localStorage.getItem("mytasks")) || [];
+		// get current id form local storage or set to 1
 		this.currentId = parseInt(localStorage.getItem("currentId")) || 1;
 		localStorage.setItem("currentId", this.currentId);
 	}
@@ -23,26 +24,23 @@ class TaskManager {
 	// Build HTML and add to table Method
 
 	getAllTasks() {
-		// get tasks from local storage
-		let lsTasks = JSON.parse(localStorage.getItem("mytasks"));
 		let html = "";
-		if (lsTasks) {
-			for (let i = 0; i < lsTasks.length; i++) {
-				// if (this.tasks.length) {
-				// 	this.tasks.forEach(function (task) {
+
+		if (this.tasks.length) {
+			this.tasks.forEach(function (task) {
 				html += `
 				<div class="task">
 				<tr>
-					<td>${lsTasks[i].status}</td>
-					<td>${lsTasks[i].name}</td>
-					<td>${lsTasks[i].description}</td>
-					<td>${lsTasks[i].assignedTo}</td>
-					<td>${lsTasks[i].dueDate}</td>
+					<td>${task.status}</td>
+					<td>${task.name}</td>
+					<td>${task.description}</td>
+					<td>${task.assignedTo}</td>
+					<td>${task.dueDate}</td>
 					<td>
 						<button
 							type="button"
 							class="updateTaskBtn btn btn-outline-warning .btn-sm"
-							value="${lsTasks[i].id}"
+							value="${task.id}"
 							data-toggle="modal"
 							data-target="#createTaskModal"
 						>
@@ -50,7 +48,7 @@ class TaskManager {
 						</button>
 						<button
 							type="button"
-							value="${lsTasks[i].id}"
+							value="${task.id}"
 							class="deleteTaskBtn btn btn-outline-danger .btn-sm"
 						>
 							Delete
@@ -67,7 +65,7 @@ class TaskManager {
 				range.selectNodeContents(tbody);
 				const taskElement = range.createContextualFragment(html);
 				tableBody.append(taskElement);
-			}
+			});
 		} else {
 			html = "";
 		}
@@ -105,7 +103,6 @@ class TaskManager {
 			// delete from array
 			if (this.tasks[i].id === id) {
 				this.tasks.splice(i, 1);
-				console.log("made it to delete method");
 
 				// delete from local storage
 
@@ -200,14 +197,6 @@ document.addEventListener("DOMContentLoaded", function () {
 				"click",
 				function (event) {
 					let deleteId = event.target.value;
-					console.log(
-						"deleteId;",
-						deleteId,
-						"taskmanager:",
-						taskManager,
-						"lsTasks:",
-						this.tasks
-					);
 
 					taskManager.deleteTask(deleteId);
 
