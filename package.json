@@ -1,0 +1,26 @@
+{
+	"name": "taskplanner",
+	"version": "1.0.0",
+	"description": "taskPlanner",
+	"main": "script.js",
+	"scripts": {
+		"start": "parcel index.html",
+		"build": "parcel build index.html"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/nigel-dot/taskplanner.git"
+	},
+	"author": "Nigel Bartholomeusz",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/nigel-dot/taskplanner/issues"
+	},
+	"homepage": "https://github.com/nigel-dot/taskplanner#readme",
+	"devDependencies": {
+		"parcel-bundler": "^1.12.4"
+	},
+	"browserslist": [
+		"last 1 Chrome version"
+	]
+}
