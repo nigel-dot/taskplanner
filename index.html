@@ -15,12 +15,12 @@
 			crossorigin="anonymous"
 		/>
 		<!-- User CSS -->
-		<!-- <link href="styles.css" rel="stylesheet type="text/css"> -->
+		<link href="./styles.css" rel="stylesheet type="text/css">
 		<title>Task Planner</title>
 	</head>
 	<!-- body -->
 	<body>
-		<div class="container-fluid col col-lg-12 col-md-8 col-sm-4">
+		<div class="container col col-lg-12 col-md-8 col-sm-4">
 			<h1>
 				Task Planner
 			</h1>
@@ -100,9 +100,8 @@
 															<input
 																class="form-control taskName"
 																type="text"
-																value=""
 																id="taskName"
-																pattern="[A-Za-z]{8,}"
+																pattern="[A-Za-z\s]+{8,}"
 																placeholder="Task name"
 																required
 															/>
@@ -120,7 +119,6 @@
 															<input
 																class="form-control taskDueDate"
 																type="date"
-																value=""
 																id="taskDueDate"
 																required
 															/>
@@ -138,9 +136,8 @@
 															<input
 																class="form-control taskAssignedTo"
 																type="text"
-																value=""
 																id="taskAssignedTo"
-																pattern="[A-Za-z]{8,}"
+																pattern="[A-Za-z\s]+{8,}"
 																placeholder="Assigned to"
 																required
 															/>
@@ -161,9 +158,8 @@
 															<input
 																class="form-control taskDescription"
 																type="text"
-																value=""
 																id="taskDescription"
-																pattern="[A-Za-z]{15,}"
+																pattern="[A-Za-z\s]+{15,}"
 																placeholder="Description of task"
 																rows="3"
 																required
@@ -233,7 +229,9 @@
 			</div>
 		</div>
 		<!-- Table end-->
-		<footer class="text-center">Created with &hearts; by the wanabes</footer>
+		<footer class="footer text-center">
+			Created with &hearts; by the wanabes - 2020
+		</footer>
 
 		<!-- Optional JavaScript -->
 		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
