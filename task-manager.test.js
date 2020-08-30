@@ -1,5 +1,7 @@
+// JavaScript to run tests on
 import TaskManager from "./task-manager";
 
+// Setup HTML
 import path from "path";
 import fs from "fs";
 const html = fs.readFileSync(path.resolve(__dirname, "./index.html"), "utf8");
@@ -8,6 +10,7 @@ beforeEach(() => {
 	document.documentElement.innerHTML = html.toString();
 });
 
+// Check to see if add task is functioning
 test(" test number of tasks - should be 1 after adding one task", () => {
 	let tm = new TaskManager("#task-modal");
 	tm.addTask("status", "name", "description", "dueDate", "assignedTo");
@@ -24,7 +27,7 @@ test("updateTask should replace old task with new", () => {
 		"assignedTo1",
 		"dueDate1"
 	);
-	const original = taskManager.tasks[1].name;
+	const firstName = taskManager.tasks[1].name;
 
 	const task2 = taskManager.updateTask(
 		"task2",
@@ -35,9 +38,9 @@ test("updateTask should replace old task with new", () => {
 		"dueDate2"
 	);
 
-	const updated = taskManager.tasks[1].name;
+	const secondName = taskManager.tasks[1].name;
 
-	expect(original).not.toBe(updated);
+	expect(firstName).not.toBe(secondName);
 });
 // Add a task and delete using the add and delete methods
 test("delete should delete task", () => {
@@ -59,6 +62,8 @@ test("delete should delete task", () => {
 	expect(taskManager.tasks.length).toBe(2);
 });
 
+// Use updateTask method to change assignedTo element
+
 test("updateTask should change assignedTo of task", () => {
 	const taskManager = new TaskManager("#task-modal");
 	const task3 = taskManager.addTask(
@@ -70,7 +75,7 @@ test("updateTask should change assignedTo of task", () => {
 	);
 
 	const originalAssignedTo = taskManager.tasks[2].assignedTo;
-	console.log(originalAssignedTo);
+
 	const task4 = taskManager.updateTask(
 		"task4",
 		"status3",
@@ -84,8 +89,3 @@ test("updateTask should change assignedTo of task", () => {
 
 	expect(originalAssignedTo).not.toBe(updatedAssignedTo);
 });
-
-// test to see if Jest is working
-// test("test works", () => {
-// 	expect(1).toBe(1);
-// });

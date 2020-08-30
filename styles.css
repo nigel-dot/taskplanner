@@ -1,3 +1,7 @@
+/* NOTE: some of the styling for this application is performed by bootstrap in the HTML */
+
+/* Background for body */
+
 body {
 	font-family: Helvetica, sans-serif;
 	color: white;
@@ -8,9 +12,9 @@ body {
 		rgba(187, 89, 5, 0.9262079831932774) 35%
 	);
 }
+
+/* Background when modal pops up */
 .modal {
-	font-family: Helvetica, sans-serif;
-	color: white;
 	background: rgb(2, 0, 36);
 	background: linear-gradient(
 		90deg,
@@ -18,12 +22,15 @@ body {
 		rgba(187, 89, 5, 0.9262079831932774) 35%
 	);
 }
+
+/* Background color and font color when modal pops up */
 .modal-content {
 	font-family: Helvetica, sans-serif;
 	color: black;
 	background: lightgray;
 }
 
+/* Table styling */
 .table {
 	font-family: Helvetica, sans-serif;
 	color: black;
@@ -31,14 +38,18 @@ body {
 	border: 5px solid black;
 }
 
+/* Header 1 styling */
 h1 {
 	text-align: center;
 	font-weight: bold;
 }
 
+/* Header 5 styling */
 h5 {
 	font-weight: bold;
 }
+
+/* Footer styling - place at the bottom of page */
 .footer {
 	position: absolute;
 	bottom: 0;

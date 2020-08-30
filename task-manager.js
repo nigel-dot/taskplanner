@@ -1,16 +1,20 @@
+// import javaScript modules to be used
+
 import Task from "./task.js";
+
 // Task Manager Class
 
 export default class TaskManager {
 	constructor() {
-		// get tasks form local storage or set to empty array
+		// get tasks from local storage or set to empty array
 		this.tasks = JSON.parse(localStorage.getItem("mytasks")) || [];
-		// get current id form local storage or set to 1
+
+		// get current id from local storage or set to 1
 		this.currentId = parseInt(localStorage.getItem("currentId")) || 1;
 		localStorage.setItem("currentId", this.currentId);
 	}
 
-	// Build HTML and add to table Method
+	// build HTML and add to table Method
 
 	getAllTasks() {
 		let html = "";
@@ -61,7 +65,7 @@ export default class TaskManager {
 		return html;
 	}
 
-	// Add task Method
+	// add task method
 
 	addTask(status, name, description, assignedTo, dueDate) {
 		const task = new Task(
@@ -83,10 +87,10 @@ export default class TaskManager {
 		localStorage.setItem("mytasks", JSON.stringify(lsTasks));
 	}
 
-	// Delete task Method
+	// delete task method
 
 	// find the array index which contains that id then remove from array
-	//  use array.splice method here to delete then do the same as addtask to rendertasks **
+
 	deleteTask(id) {
 		for (let i = 0; i < this.tasks.length; i++) {
 			// delete from array
@@ -96,7 +100,7 @@ export default class TaskManager {
 				// delete from local storage
 
 				let lsTasks = JSON.parse(localStorage.getItem("mytasks"));
-				console.log("lsTasks:", lsTasks);
+
 				lsTasks.splice(i, 1);
 				localStorage.setItem("mytasks", JSON.stringify(lsTasks));
 
@@ -105,7 +109,7 @@ export default class TaskManager {
 		}
 	}
 
-	// Update task Method
+	// update task method
 
 	updateTask(id, status, name, description, assignedTo, dueDate) {
 		let updated_id = "";

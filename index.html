@@ -21,9 +21,11 @@
 	<!-- body -->
 	<body>
 		<div class="container col col-lg-12 col-md-8 col-sm-4">
+			<!-- Heading-->
 			<h1>
 				Task Planner
 			</h1>
+
 			<!-- Table begins-->
 
 			<div class="container-fluid justify-content-between">
@@ -39,7 +41,7 @@
 							<th>Due Date</th>
 
 							<th>
-								<!-- Create Task button code-->
+								<!-- New task button code to bring up modal with form -->
 
 								<button
 									class="btn btn-outline-success createNewTaskBtn"
@@ -48,6 +50,8 @@
 								>
 									New Task
 								</button>
+
+								<!-- Filter Task button code -->
 
 								<button
 									class="btn dropdown-toggle btn-outline-info"
@@ -59,6 +63,7 @@
 								>
 									Filter Tasks
 								</button>
+
 								<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 									<a class="dropdown-item" href="#">To Do</a>
 									<a class="dropdown-item" href="#">In Progress</a>
@@ -66,12 +71,12 @@
 									<a class="dropdown-item" href="#">Done</a>
 								</div>
 
-								<!-- Start of modal-->
+								<!-- Start of popup modal with form -->
 								<div class="modal fade" id="createTaskModal">
 									<div class="modal-dialog" role="document">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h5 class="modal-title">Create Task</h5>
+												<h5 class="modal-title" id="modalTitle">Create Task</h5>
 												<button
 													type="button"
 													class="close"
@@ -82,9 +87,7 @@
 												</button>
 											</div>
 											<div class="modal-body" id="task-modal">
-												<!-- Start of Form-->
-
-												<!-- <form class="needs-validation" novalidate id="tasks"> -->
+												<!-- Start of form using pattern matching for validation with bootstrap classes and JS -->
 
 												<form class="needs-validation" novalidate>
 													<input
@@ -119,6 +122,7 @@
 															<input
 																class="form-control taskDueDate"
 																type="date"
+																placeholder="yyyy-mm-dd"
 																id="taskDueDate"
 																required
 															/>
@@ -177,7 +181,7 @@
 
 													<!-- End of Form-->
 
-													<!-- start of dropdown -->
+													<!-- start of dropdown to choose task status -->
 
 													<div class="form-group">
 														<label>Status</label>
@@ -194,6 +198,7 @@
 													</div>
 													<!-- end of dropdown -->
 													<div>
+														<!-- Create new task button to submit form and start validation of fields -->
 														<button
 															type="submit"
 															class="btn btn-outline-success .btn-sm createTaskBtn"
@@ -229,8 +234,10 @@
 			</div>
 		</div>
 		<!-- Table end-->
+
+		<!-- Footer -->
 		<footer class="footer text-center">
-			Created with &hearts; by the wanabes - 2020
+			Created with &hearts; by the wanabees - 2020
 		</footer>
 
 		<!-- Optional JavaScript -->

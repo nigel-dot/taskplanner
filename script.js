@@ -1,19 +1,20 @@
+// import javaScript modules to be used
 import Task from "./task.js";
 import TaskManager from "./task-manager.js";
 
-// Begin DOM manipulation block
-document.addEventListener("DOMContentLoaded", function () {
-	const taskManager = new TaskManager();
+// begin DOM manipulation block
+ document.addEventListener("DOMContentLoaded", function () {
+	 const taskManager = new TaskManager();
 	renderTasks();
 
-	function renderTasks() {
+	 function renderTasks() {
 		//clear any exsisting HTML
-		const itemsContainer = document.getElementById("tableBody");
+	 const itemsContainer = document.getElementById("tableBody");
 		const taskList = taskManager.getAllTasks();
 
 		itemsContainer.innerHTML = taskList;
 
-		// Look for New Task button being clicked
+		// look for new task button being clicked
 
 		let createBtn = document.querySelector(".createNewTaskBtn");
 
@@ -21,9 +22,12 @@ document.addEventListener("DOMContentLoaded", function () {
 		createBtn.addEventListener(
 			"click",
 			function (event) {
-				// change createTaskBtn button to be called Create new task
+				// change createTaskBtn button and modal title to be called Create new task
 
 				createTaskBtn.innerText = "Create new task";
+				modalTitle.innerText = "Create new task";
+
+				// get fields from form
 
 				let editId = document.querySelector(".taskId");
 				let editName = document.querySelector(".taskName");
@@ -31,6 +35,9 @@ document.addEventListener("DOMContentLoaded", function () {
 				let editDescription = document.querySelector(".taskDescription");
 				let editAssignedTo = document.querySelector(".taskAssignedTo");
 				let editDueDate = document.querySelector(".taskDueDate");
+
+				// clear out form fields
+
 				editId.value = "";
 				editName.value = "";
 				editStatus.value = "";
@@ -41,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			false
 		);
 
-		// Look for Delete button being clicked
+		// look for delete button being clicked
 
 		let deleteBtns = document.querySelectorAll(".deleteTaskBtn");
 
@@ -50,7 +57,10 @@ document.addEventListener("DOMContentLoaded", function () {
 			el.addEventListener(
 				"click",
 				function (event) {
+					// get task id to be passed to delete task method
 					let deleteId = event.target.value;
+
+					// run delete task method
 
 					taskManager.deleteTask(deleteId);
 
@@ -60,21 +70,21 @@ document.addEventListener("DOMContentLoaded", function () {
 			);
 		});
 
-		// Look for Update button being clicked
+		// look for update button being clicked
 
 		let updateTask = document.querySelectorAll(".updateTaskBtn");
-		console.log(updateTask);
 
 		// loop over updates and attach click event listener
 		const updateSetup = Array.prototype.filter.call(updateTask, function (el) {
 			el.addEventListener(
 				"click",
 				function (event) {
-					// change createTaskBtn button to be called update task
+					// change createTaskBtn button and modal title to be called update task
 
 					createTaskBtn.innerText = "Update task";
+					modalTitle.innerText = "Update task";
 
-					let targetId = event.target.value;
+					// set update variables into form
 
 					let editId = document.querySelector(".taskId");
 					let editName = document.querySelector(".taskName");
@@ -83,10 +93,15 @@ document.addEventListener("DOMContentLoaded", function () {
 					let editAssignedTo = document.querySelector(".taskAssignedTo");
 					let editDueDate = document.querySelector(".taskDueDate");
 
+					// setup task id variable to be interigated
+
+					let targetId = event.target.value;
+
 					// get task from array and set values
 
 					const task = taskManager.tasks.find((t) => t.id === targetId);
-					console.log("task:", task);
+
+					// set update variables to be passed to update task method
 
 					editId.value = task.id;
 					editName.value = task.name;
@@ -101,9 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			);
 		});
 	}
-	// Validation code for disabling form submissions if there are invalid fields
-
-	// Fetch all the forms we want to apply custom Bootstrap validation styles to
+	// validation code for disabling form submissions if there are invalid fields passed to bootstrap classes
 
 	const forms = document.getElementsByClassName("needs-validation");
 
@@ -123,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
 					let assignedTo = form.taskAssignedTo.value;
 					let dueDate = form.taskDueDate.value;
 
-					// Look for taskId if there it is an update of the task
+					// Look for taskId if there it is an update of the task then run update task method
 
 					if (form.taskId.value) {
 						taskManager.updateTask(
@@ -137,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 						renderTasks();
 					} else {
-						// Look for taskId if not there it is an add task
+						// Look for taskId if not then run add task method
 
 						taskManager.addTask(status, name, description, assignedTo, dueDate);
 						renderTasks();
