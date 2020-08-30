@@ -2,14 +2,28 @@ Project Title
 
 Task Planner
 
-Built With
+Built using :
 
-HTML - Scafold
-Bootstrap - Framework
-CSS - Styling
+HTML - Scafold ,
+Bootstrap - Framework ,
+CSS - Styling ,
 JavaScript - Functionality
 
-Authors
+modulerized :
 
-Nigel Bartholomeusz
+package bundler
+
+To run application :
+
+cmd : 'npm start'
+
+Testing : Jest
+
+To run tests :
+
+cmd : 'npm test'
+
+Authors:
+
+Nigel Bartholomeusz ,
 Nirmal Silva
