@@ -28,6 +28,13 @@ body {
 	color: black;
 	background: lightgray;
 }
+/* To be used for mobile phones */
+.modal-body {
+	max-height: 350px;
+	padding: 15px;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
 
 /* Table styling */
 .table {
